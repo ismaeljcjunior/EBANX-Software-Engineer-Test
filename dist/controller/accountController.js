@@ -8893,6 +8893,7 @@ var resetAccount = async (req, res) => {
     await prisma.$executeRawUnsafe("TRUNCATE TABLE `ACCOUNT`");
     res.status(200).json({ 200: "OK" });
   } catch (e) {
+    res.status(500).json({ 400: e.message });
     console.log(e);
   }
 };

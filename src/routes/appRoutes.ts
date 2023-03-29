@@ -10,3 +10,5 @@ app.use(cors())
 app.use(express.json())
 
 app.post('/reset', resetAccount )
+
+export const appRoutes = app

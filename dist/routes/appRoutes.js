@@ -7,6 +7,10 @@ var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
 var __copyProps = (to2, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -23,6 +27,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // node_modules/dotenv/package.json
 var require_package = __commonJS({
@@ -8874,6 +8879,11 @@ var require_client2 = __commonJS({
 });
 
 // src/routes/appRoutes.ts
+var appRoutes_exports = {};
+__export(appRoutes_exports, {
+  appRoutes: () => appRoutes
+});
+module.exports = __toCommonJS(appRoutes_exports);
 var dotenv2 = __toESM(require_main());
 var import_express = __toESM(require("express"));
 var import_cors = __toESM(require("cors"));
@@ -8888,6 +8898,7 @@ var resetAccount = async (req, res) => {
     await prisma.$executeRawUnsafe("TRUNCATE TABLE `ACCOUNT`");
     res.status(200).json({ 200: "OK" });
   } catch (e) {
+    res.status(500).json({ 400: e.message });
     console.log(e);
   }
 };
@@ -8898,6 +8909,11 @@ var app = (0, import_express.default)();
 app.use((0, import_cors.default)());
 app.use(import_express.default.json());
 app.post("/reset", resetAccount);
+var appRoutes = app;
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  appRoutes
+});
 /*! Bundled license information:
 
 @prisma/client/runtime/library.js:
