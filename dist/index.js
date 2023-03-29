@@ -8893,7 +8893,25 @@ var resetAccount = async (req, res) => {
     await prisma.$executeRawUnsafe("TRUNCATE TABLE `ACCOUNT`");
     res.status(200).json({ 200: "OK" });
   } catch (e) {
-    res.status(500).json({ 400: e.message });
+    res.status(400).json({ 400: e.message });
+    console.log(e);
+  }
+};
+var getBalance = async (req, res) => {
+  const accountID = parseInt(req.query.account_id);
+  console.log(accountID);
+  try {
+    const account = await prisma.account.findUnique({
+      where: {
+        ID_ACCOUNT: accountID
+      }
+    });
+    if (account == null) {
+      return res.status(404).json({ 404: 0 });
+    }
+    res.status(200).json({ 200: "OK", Account: account });
+  } catch (e) {
+    res.status(400).json({ 400: 0 });
     console.log(e);
   }
 };
@@ -8904,6 +8922,7 @@ var app = (0, import_express.default)();
 app.use((0, import_cors.default)());
 app.use(import_express.default.json());
 app.post("/reset", resetAccount);
+app.get("/balance", getBalance);
 var appRoutes = app;
 
 // src/index.ts
