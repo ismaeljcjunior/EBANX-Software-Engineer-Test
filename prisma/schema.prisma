@@ -1,0 +1,18 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model account {
+  ID_ACCOUNT     Int      @id @default(autoincrement())
+  AMOUNT_ACCOUNT String
+  CREATED_AT     DateTime @default(now())
+  UPDATE_AT      DateTime
+}
