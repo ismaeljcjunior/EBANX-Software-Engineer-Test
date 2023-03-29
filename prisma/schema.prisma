@@ -14,5 +14,5 @@ model account {
   ID_ACCOUNT     Int      @id @default(autoincrement())
   AMOUNT_ACCOUNT String
   CREATED_AT     DateTime @default(now())
-  UPDATE_AT      DateTime
+  UPDATE_AT      DateTime @default(now())
 }
